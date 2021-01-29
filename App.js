@@ -19,13 +19,15 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import SignInScreen from './src/screens/SignInScreen'
+import MainStore from './src/stores/MainStore'
+
+
+import Provider from 'react-redux'
+import AuthenticationStack from './src/navigators/AuthenticationStack';
 
 const App = () => {
   return (
-    <>
-      <StatusBar hidden={true} />
-      <SignInScreen />
-    </>
+   <AuthenticationStack />
   );
 };
 

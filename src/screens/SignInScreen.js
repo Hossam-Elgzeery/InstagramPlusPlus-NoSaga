@@ -1,15 +1,48 @@
-import React,{useEffect,useState} from 'react'
-import {StyleSheet,View,TextInput,TouchableOpacity,ImageBackground,Text, KeyboardAvoidingView,ActivityIndicator,Image,Pressable,ToastAndroid} from 'react-native'
+import React,{useState} from 'react'
+import {Alert,StyleSheet,View,TextInput,TouchableOpacity,Text,ActivityIndicator,Image} from 'react-native'
 
 
-import { useNavigation,useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {widthRate,heightRate} from '../components/screenSizes';
+import {useDispatch} from 'react-redux'
+
+import fakeapi from '../apis/fakeapi'
 
 
 const SignInScreen=()=>{
 
+    const navigation=useNavigation();
+
+    const [loadingST,setLoading]=useState(false);
     const [usernameST,setUsername]=useState('');
     const [passwordST,setPassword]=useState('');
+
+    const dispatchUserData=useDispatch();
+
+    const loginFunc=async(name,password)=>{
+
+        setLoading(true);
+        try{
+            const response=await fakeapi.get(`/users?name=${name}&password=${password}`);
+
+           if (response.data.length>0)
+           {
+            dispatchUserData({type:'login',payload:{userid:response.data[0].id}})
+            navigation.navigate('Test')
+           }
+           else 
+           
+            Alert.alert('Login','wrong username or password');
+        }
+        catch(e)
+        {
+            Alert.alert('Error',e.message);
+        }
+        finally
+        {
+            setLoading(false);
+        }
+    }
  
     return(
     <View style={styles.mainContainer}>
@@ -20,14 +53,21 @@ const SignInScreen=()=>{
 
         <TextInput placeholder='Password' value={passwordST} onChangeText={(input)=>{setPassword(input)}} style={styles.inputBoxes} secureTextEntry />
        
+       {
+       (loadingST)?
+       
+       <ActivityIndicator style={styles.loadingStyle} size="large" color="#d64045" />
+       
+       :
         <TouchableOpacity style={styles.loginBtn} onPress={()=>{
-             ToastAndroid.show("Login", ToastAndroid.SHORT);
+             
+            loginFunc(usernameST,passwordST)
         }} >
             
                 <Text style={styles.btnText}>Login</Text>
             
         </TouchableOpacity>
-       
+    }
 
     </View>
     )
@@ -71,7 +111,15 @@ btnText:{
     textAlign:'center',
    
     
+},
+loadingStyle:{
+   
+    alignContent:'center',
+    justifyContent:'center',
+    
+    marginTop:heightRate(5),
 }
+
 });
 
 export default SignInScreen;
