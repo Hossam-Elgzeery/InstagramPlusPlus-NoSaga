@@ -2,8 +2,8 @@ import React,{useState} from 'react'
 import {Alert,StyleSheet,View,TextInput,TouchableOpacity,Text,ActivityIndicator,Image} from 'react-native'
 
 
-import { useNavigation } from '@react-navigation/native';
-import {widthRate,heightRate} from '../components/screenSizes';
+
+import {widthRate,heightRate} from '../helperfunc/screenSizes';
 import {useDispatch} from 'react-redux'
 
 import fakeapi from '../apis/fakeapi'
@@ -11,7 +11,7 @@ import fakeapi from '../apis/fakeapi'
 
 const SignInScreen=()=>{
 
-    const navigation=useNavigation();
+    
 
     const [loadingST,setLoading]=useState(false);
     const [usernameST,setUsername]=useState('');
@@ -27,21 +27,22 @@ const SignInScreen=()=>{
 
            if (response.data.length>0)
            {
+            setLoading(false);
             dispatchUserData({type:'login',payload:{userid:response.data[0].id}})
-            navigation.navigate('Test')
+           
            }
            else 
-           
+           {
             Alert.alert('Login','wrong username or password');
+            setLoading(false);
+           }
         }
         catch(e)
         {
+            setLoading(false);
             Alert.alert('Error',e.message);
         }
-        finally
-        {
-            setLoading(false);
-        }
+    
     }
  
     return(
@@ -114,8 +115,7 @@ btnText:{
 },
 loadingStyle:{
    
-    alignContent:'center',
-    justifyContent:'center',
+    
     
     marginTop:heightRate(5),
 }
