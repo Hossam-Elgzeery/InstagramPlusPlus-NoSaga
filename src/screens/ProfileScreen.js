@@ -39,7 +39,8 @@ const ProfileScreen=()=>{
             catch(e)
             {
                
-                Alert.alert('Error',e.message);
+                Alert.alert('Error',e);
+                console.log(e);
                 setReload(true);
             }
 

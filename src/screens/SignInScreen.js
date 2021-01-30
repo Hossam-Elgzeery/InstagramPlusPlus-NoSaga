@@ -16,6 +16,7 @@ const SignInScreen=()=>{
     const [loadingST,setLoading]=useState(false);
     const [usernameST,setUsername]=useState('');
     const [passwordST,setPassword]=useState('');
+    const [wrongST,setWrong]=useState(false);
 
     const dispatchUserData=useDispatch();
 
@@ -33,7 +34,7 @@ const SignInScreen=()=>{
            }
            else 
            {
-            Alert.alert('Login','wrong username or password');
+            setWrong(true);
             setLoading(false);
            }
         }
@@ -50,9 +51,21 @@ const SignInScreen=()=>{
 
         <Image source={require('../assets/logo.png')}  style={styles.logo}/>
 
-        <TextInput placeholder='Username' value={usernameST} onChangeText={(input)=>{setUsername(input)}} style={styles.inputBoxes} />
+        <TextInput placeholder='Username' value={usernameST} onChangeText={(input)=>{
+            setUsername(input);
 
-        <TextInput placeholder='Password' value={passwordST} onChangeText={(input)=>{setPassword(input)}} style={styles.inputBoxes} secureTextEntry />
+            {(wrongST) && setWrong(false)}
+
+            }} style={styles.inputBoxes} />
+
+        <TextInput placeholder='Password' value={passwordST} onChangeText={(input)=>{
+            setPassword(input);
+
+            {(wrongST) && setWrong(false)}
+
+            }} style={styles.inputBoxes} secureTextEntry />
+
+            {(wrongST) && <Text style={styles.wrong}>Wrong user or password</Text>}
        
        {
        (loadingST)?
@@ -118,6 +131,9 @@ loadingStyle:{
     
     
     marginTop:heightRate(5),
+},
+wrong:{
+    color:'red'
 }
 
 });

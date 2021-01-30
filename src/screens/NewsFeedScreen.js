@@ -5,13 +5,14 @@ import HeadBar from '../components/HeadBar'
 
 import {useSelector} from 'react-redux';
 import fakeapi from '../apis/fakeapi'
-import UserCard from '../components/UserCard';
+import PostCard from '../components/PostCard';
+import { FlatList } from 'react-native-gesture-handler';
 
 
 const NewsFeedScreen=()=>{
 
     
-    const [dataST,setData]=useState(null);
+    const [dataST,setData]=useState([]);
     const [loadingST,setLoading]=useState(true);
     const[reloadST,setReload]=useState(false);
 
@@ -19,13 +20,14 @@ const NewsFeedScreen=()=>{
 
            setLoading(true);
             try{
-                const response=await fakeapi.get(`/users?id=${id}`);
+                const response=await fakeapi.get('/posts');
     
                if (response.data.length>0)
                {
                
                 setReload(false);
-                setUser(response.data[0]);
+                setData(response.data);
+                
                 
                
                }
@@ -59,7 +61,7 @@ const NewsFeedScreen=()=>{
  
     return(
     <View style={styles.mainContainer}>
-        <HeadBar title='Profile' />
+        <HeadBar title='NewsFeed' />
         {
             (loadingST)?
 
@@ -75,7 +77,17 @@ const NewsFeedScreen=()=>{
                         
                     </TouchableOpacity>
                 :
-                    <Text>Data Found</Text>
+                    <FlatList
+                    style={{flex:1}}
+                    data={dataST}
+                    renderItem={({item})=>{
+                     
+                        return (
+                        <PostCard data={item}/>
+                        )
+                    }}
+                    keyExtractor={item => String(item.id)}
+                />
         
         }
         
