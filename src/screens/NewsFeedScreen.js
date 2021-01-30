@@ -1,17 +1,18 @@
-import React,{useEffect,useState} from 'react'
-import {StyleSheet,View,Text,Image,ActivityIndicator,Alert,TouchableOpacity} from 'react-native'
+import React,{useEffect,useState,useCallback} from 'react';
+import {StyleSheet,View,Text,Image,ActivityIndicator,Alert,TouchableOpacity,RefreshControl} from 'react-native';
 import {widthRate,heightRate} from '../helperfunc/screenSizes';
-import HeadBar from '../components/HeadBar'
-
-import {useSelector} from 'react-redux';
-import fakeapi from '../apis/fakeapi'
+import HeadBar from '../components/HeadBar';
+import {useFocusEffect,useNavigation} from '@react-navigation/native';
+import fakeapi from '../apis/fakeapi';
 import PostCard from '../components/PostCard';
 import { FlatList } from 'react-native-gesture-handler';
 
 
+
+
 const NewsFeedScreen=()=>{
 
-    
+    const navigation=useNavigation();    
     const [dataST,setData]=useState([]);
     const [loadingST,setLoading]=useState(true);
     const[reloadST,setReload]=useState(false);
@@ -52,16 +53,20 @@ const NewsFeedScreen=()=>{
         }
   
 
-    useEffect(()=>{
+    useFocusEffect(
+        useCallback(
+        ()=>{
 
         getData();
 
-    },[]);
+        return () => setLoading(true);
+
+    },[]));
   
  
     return(
     <View style={styles.mainContainer}>
-        <HeadBar title='NewsFeed' />
+        <HeadBar title='News Feed' />
         {
             (loadingST)?
 
@@ -78,6 +83,11 @@ const NewsFeedScreen=()=>{
                     </TouchableOpacity>
                 :
                     <FlatList
+                    refreshControl={
+                        <RefreshControl                               
+                        refreshing={loadingST}
+                        onRefresh={()=>getData()} />
+            }
                     style={{flex:1}}
                     data={dataST}
                     renderItem={({item})=>{
@@ -90,7 +100,12 @@ const NewsFeedScreen=()=>{
                 />
         
         }
-        
+
+        <TouchableOpacity onPress={()=>{
+            navigation.navigate('Add')
+        }} style={styles.fbutton}>
+            <Text style={styles.ftext}>+</Text>
+        </TouchableOpacity>  
 
     </View>
     )
@@ -127,6 +142,34 @@ btnText:{
    
     
 },
+fbutton:{
+    alignItems:'center',
+    justifyContent:'center',
+    position:'absolute',
+    right:widthRate(5),    
+    bottom:heightRate(2),
+    width:widthRate(10),
+    height:heightRate(5),
+    borderRadius:10,
+    backgroundColor:'#d64045',
+
+
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+
+    elevation: 14,
+    
+},
+ftext:{
+    color:'white',
+    fontSize:30,
+    
+}
 
 
 });

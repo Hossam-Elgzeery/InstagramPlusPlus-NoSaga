@@ -1,10 +1,9 @@
-import React,{useEffect,useState} from 'react'
-import {StyleSheet,View,Text,Image,ActivityIndicator,Alert,TouchableOpacity} from 'react-native'
+import React,{useEffect,useState} from 'react';
+import {StyleSheet,View,Text,ActivityIndicator,Alert,TouchableOpacity} from 'react-native';
 import {widthRate,heightRate} from '../helperfunc/screenSizes';
-import HeadBar from '../components/HeadBar'
-
+import HeadBar from '../components/HeadBar';
 import {useSelector} from 'react-redux';
-import fakeapi from '../apis/fakeapi'
+import fakeapi from '../apis/fakeapi';
 import UserCard from '../components/UserCard';
 
 

@@ -1,12 +1,8 @@
-import React,{useState} from 'react'
-import {Alert,StyleSheet,View,TextInput,TouchableOpacity,Text,ActivityIndicator,Image} from 'react-native'
-
-
-
+import React,{useState} from 'react';
+import {Alert,StyleSheet,View,TextInput,TouchableOpacity,Text,ActivityIndicator,Image} from 'react-native';
 import {widthRate,heightRate} from '../helperfunc/screenSizes';
-import {useDispatch} from 'react-redux'
-
-import fakeapi from '../apis/fakeapi'
+import {useDispatch} from 'react-redux';
+import fakeapi from '../apis/fakeapi';
 
 
 const SignInScreen=()=>{
@@ -103,7 +99,6 @@ logo:{
 inputBoxes:{
 height:heightRate(5),
 width:widthRate(80),
-backgroundColor:'white',
 marginVertical:heightRate(2),
 backgroundColor:'#e9fff9',
 borderRadius:5

@@ -1,11 +1,8 @@
 import React,{useEffect} from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
-
 import AuthenticationStack from './AuthenticationStack';
 import TabsNavigator from './TabsNavigator';
-
 import {useSelector} from 'react-redux';
 
 
