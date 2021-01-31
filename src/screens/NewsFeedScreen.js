@@ -1,5 +1,5 @@
 import React,{useState,useCallback} from 'react';
-import {StyleSheet,View,Text,Image,ActivityIndicator,Alert,TouchableOpacity,RefreshControl} from 'react-native';
+import {StyleSheet,View,Text,ActivityIndicator,Alert,TouchableOpacity} from 'react-native';
 import {widthRate,heightRate} from '../helperfunc/screenSizes';
 import HeadBar from '../components/HeadBar';
 import {useFocusEffect,useNavigation} from '@react-navigation/native';

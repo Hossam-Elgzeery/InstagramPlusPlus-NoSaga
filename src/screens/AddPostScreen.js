@@ -16,7 +16,7 @@ const AddPostScreen=()=>{
 
     const userData=useSelector(state=>state.userdata);
 
-    const [imageST,setImage]=useState('');
+    
     const [loading,setLoading]=useState(true);
     const [wishST,setWish]=useState(null)
     const [listST,setList]=useState([]);

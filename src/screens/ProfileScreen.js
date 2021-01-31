@@ -100,7 +100,7 @@ loadingStyle:{
 },
 
 refreshbtn:{
-    backgroundColor:'#d64045',
+    backgroundColor:'#3b5998',
     height:heightRate(5),
     width:widthRate(30),
     alignContent:'center',
