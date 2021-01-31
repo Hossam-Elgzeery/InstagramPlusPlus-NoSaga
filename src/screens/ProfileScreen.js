@@ -64,7 +64,7 @@ const ProfileScreen=()=>{
         {
             (loadingST)?
 
-                <ActivityIndicator style={styles.loadingStyle} size="large" color="#d64045" />
+                <ActivityIndicator style={styles.loadingStyle} size="large" color="#3b5998" />
                 :
                 (reloadST)?
                     <TouchableOpacity style={styles.refreshbtn} onPress={()=>{
@@ -88,7 +88,7 @@ const ProfileScreen=()=>{
 const styles=StyleSheet.create({
 mainContainer:{
     flex:1,
-    backgroundColor:'#9ed8db',
+    backgroundColor:'#ffffff',
     alignItems:'center'
     
 },

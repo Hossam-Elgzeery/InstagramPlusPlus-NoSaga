@@ -24,7 +24,7 @@ main:{
     width:widthRate(100),
     height:heightRate(6),    
     borderBottomWidth:1,
-    backgroundColor:'#cfdbd5',
+    backgroundColor:'#8b9dc3',
     paddingTop:heightRate(1)
     
     

@@ -25,7 +25,7 @@ const SignInScreen=()=>{
            if (response.data.length>0)
            {
             setLoading(false);
-            dispatchUserData({type:'login',payload:{userid:response.data[0].id}})
+            dispatchUserData({type:'login',payload:{userid:response.data[0].id,userdata:response.data[0]}})
            
            }
            else 
@@ -38,6 +38,7 @@ const SignInScreen=()=>{
         {
             setLoading(false);
             Alert.alert('Error',e.message);
+            
         }
     
     }
@@ -66,7 +67,7 @@ const SignInScreen=()=>{
        {
        (loadingST)?
        
-       <ActivityIndicator style={styles.loadingStyle} size="large" color="#d64045" />
+       <ActivityIndicator style={styles.loadingStyle} size="large" color="#dfe3ee" />
        
        :
         <TouchableOpacity style={styles.loginBtn} onPress={()=>{
@@ -86,7 +87,7 @@ const SignInScreen=()=>{
 const styles=StyleSheet.create({
 mainContainer:{
     flex:1,
-    backgroundColor:'#9ed8db',
+    backgroundColor:'#3B5998',
     alignItems:'center'
     
 },
@@ -100,12 +101,12 @@ inputBoxes:{
 height:heightRate(5),
 width:widthRate(80),
 marginVertical:heightRate(2),
-backgroundColor:'#e9fff9',
+backgroundColor:'#f7f7f7',
 borderRadius:5
 
 },
 loginBtn:{
-    backgroundColor:'#d64045',
+    backgroundColor:'#dfe3ee',
     height:heightRate(5),
     width:widthRate(30),
     alignContent:'center',
@@ -115,7 +116,7 @@ loginBtn:{
     
 },
 btnText:{
-    color:'#F7F7FF',
+    color:'#000000',
     fontSize:20,   
     textAlign:'center',
    
@@ -128,7 +129,7 @@ loadingStyle:{
     marginTop:heightRate(5),
 },
 wrong:{
-    color:'red'
+    color:'#ffffff'
 }
 
 });

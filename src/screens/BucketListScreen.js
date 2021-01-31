@@ -31,7 +31,7 @@ const BucketListScreen=()=>{
         <HeadBar title='Bucket List' />
         {(loading)?
 
-        <ActivityIndicator style={styles.loadingStyle} size="large" color="#d64045" />
+        <ActivityIndicator style={styles.loadingStyle} size="large" color="#3b5998" />
         :
         <>
         <View style={styles.bucketInput}>
@@ -54,8 +54,9 @@ const BucketListScreen=()=>{
         <FlatList
             style={{flex:1}}
             data={listST}
+            showsVerticalScrollIndicator={false}
             renderItem={({item})=>{
-                        
+                    
             return (
             <View style={{width:widthRate(80),borderBottomWidth:.5,paddingVertical:heightRate(1)}}>
                 <Text style={{fontSize:20,fontWeight:'bold'}}>{item}</Text>
@@ -75,7 +76,7 @@ const BucketListScreen=()=>{
 const styles=StyleSheet.create({
 mainContainer:{
     flex:1,
-    backgroundColor:'#9ed8db',
+    backgroundColor:'#ffffff',
     alignItems:'center'
     
 },
@@ -89,7 +90,7 @@ placeinput:{
     height:heightRate(5),
     width:widthRate(70),
     marginVertical:heightRate(2),
-    backgroundColor:'#e9fff9',
+    backgroundColor:'#8b9dc3',
     borderRadius:5
 },
 addbtn:{
@@ -97,7 +98,7 @@ addbtn:{
     height:heightRate(5),
     width:widthRate(15),
     marginVertical:heightRate(2),
-    backgroundColor:'black',
+    backgroundColor:'#3b5998',
     borderRadius:5,
     alignItems:'center',
     justifyContent:'center'

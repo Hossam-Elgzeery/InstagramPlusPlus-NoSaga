@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useCallback} from 'react';
+import React,{useState,useCallback} from 'react';
 import {StyleSheet,View,Text,Image,ActivityIndicator,Alert,TouchableOpacity,RefreshControl} from 'react-native';
 import {widthRate,heightRate} from '../helperfunc/screenSizes';
 import HeadBar from '../components/HeadBar';
@@ -14,8 +14,9 @@ const NewsFeedScreen=()=>{
 
     const navigation=useNavigation();    
     const [dataST,setData]=useState([]);
-    const [loadingST,setLoading]=useState(true);
+    const [loadingST,setLoading]=useState(true);    
     const[reloadST,setReload]=useState(false);
+ 
 
     const getData=async()=>{
 
@@ -24,12 +25,9 @@ const NewsFeedScreen=()=>{
                 const response=await fakeapi.get('/posts');
     
                if (response.data.length>0)
-               {
-               
+               {               
                 setReload(false);
-                setData(response.data);
-                
-                
+                setData(response.data.reverse());             
                
                }
                else 
@@ -39,8 +37,7 @@ const NewsFeedScreen=()=>{
                }
             }
             catch(e)
-            {
-               
+            {               
                 Alert.alert('Error',e.message);
                 setReload(true);
             }
@@ -53,15 +50,17 @@ const NewsFeedScreen=()=>{
         }
   
 
-    useFocusEffect(
-        useCallback(
-        ()=>{
+        useFocusEffect(
+            useCallback(
+            ()=>{
+    
+            getData();
+    
+            return () => setLoading(true);
+    
+        },[]));
 
-        getData();
-
-        return () => setLoading(true);
-
-    },[]));
+        
   
  
     return(
@@ -70,7 +69,7 @@ const NewsFeedScreen=()=>{
         {
             (loadingST)?
 
-                <ActivityIndicator style={styles.loadingStyle} size="large" color="#d64045" />
+                <ActivityIndicator style={styles.loadingStyle} size="large" color="#3b5998" />
                 :
                 (reloadST)?
                     <TouchableOpacity style={styles.refreshbtn} onPress={()=>{
@@ -83,11 +82,8 @@ const NewsFeedScreen=()=>{
                     </TouchableOpacity>
                 :
                     <FlatList
-                    refreshControl={
-                        <RefreshControl                               
-                        refreshing={loadingST}
-                        onRefresh={()=>getData()} />
-            }
+                  
+                    showsVerticalScrollIndicator={false}
                     style={{flex:1}}
                     data={dataST}
                     renderItem={({item})=>{
@@ -114,7 +110,7 @@ const NewsFeedScreen=()=>{
 const styles=StyleSheet.create({
 mainContainer:{
     flex:1,
-    backgroundColor:'#9ed8db',
+    backgroundColor:'#ffffff',
     alignItems:'center'
     
 },
@@ -126,7 +122,7 @@ loadingStyle:{
 },
 
 refreshbtn:{
-    backgroundColor:'#d64045',
+    backgroundColor:'#3b5998',
     height:heightRate(5),
     width:widthRate(30),
     alignContent:'center',
@@ -151,7 +147,7 @@ fbutton:{
     width:widthRate(10),
     height:heightRate(5),
     borderRadius:10,
-    backgroundColor:'#d64045',
+    backgroundColor:'#3b5998',
 
 
     shadowColor: "#000",

@@ -1,4 +1,4 @@
-const datediff=(date)=>{
+export const datediff=(date)=>{
    
     const date1 = new Date(date);
    
@@ -11,5 +11,10 @@ const datediff=(date)=>{
 }
 
 
+export const dateFormat=(date=new Date())=>
+{ 
+    return date.toLocaleDateString();
+}
 
-export default datediff;
+
+

@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 const TabsNavigator=()=> {
   return (
    
-        <Tab.Navigator tabBarOptions={{tabStyle:{backgroundColor:'#cfdbd5'}}}>
+        <Tab.Navigator tabBarOptions={{tabStyle:{backgroundColor:'#dfe3ee'}}}>
             <Tab.Screen name="NewsFeed"  component={NewsFeedStack} options={{tabBarLabel:'News Feed',tabBarIcon:()=><Image source={require('../assets/newsfeed.png')} style={{height:heightRate(5),width:widthRate(5),resizeMode:'contain'}} />}} />
             <Tab.Screen name="BucketList" component={BucketListScreen} options ={{tabBarLabel:'Bucket List',tabBarIcon:()=><Image source={require('../assets/list.png')} style={{height:heightRate(5),width:widthRate(5),resizeMode:'contain'}} />}} />
             <Tab.Screen name="Profile" component={ProfileScreen} options={{tabBarLabel:'Profile',tabBarIcon:()=><Image source={require('../assets/profile.png')} style={{height:heightRate(5),width:widthRate(5),resizeMode:'contain'}} />}} />

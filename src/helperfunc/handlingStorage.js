@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const getData = async (key,assign,loading) => {
+export const getData = async (key,assign,loading) => {
     loading(true);
     try {
         
@@ -19,7 +19,7 @@ const getData = async (key,assign,loading) => {
     }
   }
 
-  const storeData = async (key,assign,loading,value,previous) => {
+export const storeData = async (key,assign,loading,value,previous) => {
     loading(true);
     let mynew=[...previous,value];
    
@@ -37,7 +37,7 @@ const getData = async (key,assign,loading) => {
 
 
 
-  const DeleteFromData = async (key,assign,loading,value,previous) => {
+export const DeleteFromData = async (key,assign,loading,value,previous) => {
     loading(true);
     
     let filteredArray = previous.filter(item => item !== value)
@@ -55,5 +55,5 @@ const getData = async (key,assign,loading) => {
     }
   }
 
-  export {getData,storeData,DeleteFromData} ;
+
   

@@ -1,7 +1,8 @@
 import {createStore} from 'redux'
 
 const initialState={      
-        userid:null   
+        userid:null,
+        userdata:{}   
 }
 
 const Store=(state=initialState,action)=>{
@@ -10,7 +11,7 @@ const Store=(state=initialState,action)=>{
        
 
         case 'login':
-            return {...state,userid:action.payload.userid}
+            return {...state,userid:action.payload.userid,userdata:action.payload.userdata}
 
         default:
             return state;

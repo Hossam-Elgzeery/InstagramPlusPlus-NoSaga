@@ -3,7 +3,7 @@ import React from 'react';
 import {View,Text,StyleSheet,Image} from 'react-native';
 
 import {widthRate,heightRate} from '../helperfunc/screenSizes';
-import datediff from '../helperfunc/datediff';
+import {datediff} from '../helperfunc/date';
 
 const PostCard=({data})=>{
 
